@@ -8,9 +8,9 @@ const Header = () => {
         <div className="header-contents">
           <h2> Ethiopian Restaurant</h2>
           <p>
-            Ethiopian cuisine is unique not only for its distinct flavors and
-            ingredients but also for the cultural significance it holds in the
-            country. 
+            Ethiopian cuisine is unique not only for its <br />
+            distinct flavors and ingredients but also for <br />
+            the cultural significance it holds in the country.
           </p>
           <button> Menu</button>
         </div>

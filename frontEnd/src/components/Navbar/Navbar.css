@@ -104,8 +104,8 @@
   }
 }
 @media (max-width: 900px) {
-  .navbar .logo {
-    width: 120px;
+  .navbar h2 {
+    font-size: larger;
   }
   .navbar-menu {
     gap: 15px;
