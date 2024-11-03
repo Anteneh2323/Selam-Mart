@@ -1,0 +1,76 @@
+/* Sidebar.css */
+
+.sidebar {
+  width: 18%;
+  min-height: 100vh;
+  background-color: #84500bc0; /* Warm, rustic brown */
+  border-right: 1.5px solid #c9c9c9;
+  font-size: max(1vw, 12px);
+  color: #ffffff;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.sidebar-options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 10%;
+}
+
+.sidebar-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px 0 0 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-option img {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-option p {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.sidebar-option.active {
+  background-color: #4a8f73; /* Muted green for active option */
+  border-left: 4px solid #f4a261; /* Warm orange accent */
+  color: #f4a261;
+}
+
+.sidebar-option:hover {
+  background-color: #4a8f73;
+  transform: translateX(4px);
+}
+
+.sidebar-option:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 35%; /* Increased width for better readability */
+  }
+  .sidebar-option p {
+    display: block; /* Ensure text remains visible */
+  }
+  .sidebar-options {
+    padding-left: 10%; /* Adjust padding to fit the screen */
+  }
+  .sidebar-option {
+    padding: 10px 15px; /* Adjust padding for readability */
+    font-size: 14px; /* Increase font size for mobile */
+  }
+}

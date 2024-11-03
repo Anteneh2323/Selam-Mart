@@ -1,0 +1,98 @@
+.add {
+  width: 70%;
+  max-width: 600px; /* Maximum width for larger screens */
+  margin: 50px auto; /* Center align with top margin */
+  color: #4a4a4a; /* Darker color for better readability */
+  font-family: "Arial", sans-serif; /* Clean font */
+  border: 1px solid #e0e0e0; /* Subtle border for definition */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  padding: 20px; /* Inner padding */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #fff; /* White background for contrast */
+}
+
+.add form {
+  display: flex;
+  flex-direction: column; /* Stack form elements */
+  gap: 15px; /* Spacing between elements */
+}
+
+.add-img-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the upload area */
+}
+
+.add-img-upload .image-area {
+  cursor: pointer;
+}
+
+.add-product-name,
+.add-product-description,
+.add-category-price {
+  width: 100%; /* Full width for inputs */
+}
+
+.add-product-name input,
+.add-product-description textarea,
+.add-category-price select,
+.add-category-price input {
+  padding: 12px; /* Increased padding for comfort */
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Ensure padding is included in width */
+  border: 1px solid #d1d1d1; /* Light border for inputs */
+  border-radius: 4px; /* Slightly rounded edges */
+  transition: border-color 0.3s; /* Smooth transition for focus */
+}
+
+.add-product-name input:focus,
+.add-product-description textarea:focus,
+.add-category-price select:focus,
+.add-category-price input:focus {
+  border-color: rgb(126, 28, 28); /* Highlight border on focus */
+  outline: none; /* Remove default outline */
+}
+
+.add-category-price {
+  display: flex; /* Flexbox for category and price */
+  gap: 15px; /* Space between category and price fields */
+}
+
+.add-category-price select {
+  flex: 1; /* Allow select to take available space */
+}
+
+.add-btn {
+  max-width: 120px;
+  border: none;
+  padding: 12px; /* Slightly increased padding */
+  background-color: rgb(126, 28, 28); /* Deep red for button */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+  border-radius: 4px; /* Rounded button edges */
+}
+
+.add-btn:hover {
+  background-color: rgb(100, 22, 22); /* Darker shade on hover */
+}
+
+.add-btn:disabled {
+  background-color: grey; /* Disabled button styling */
+  cursor: not-allowed; /* Not allowed cursor */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .add {
+    width: 90%; /* More width on smaller screens */
+  }
+
+  .add-category-price {
+    flex-direction: column; /* Stack category and price fields */
+  }
+
+  .add-category-price input {
+    margin-top: 10px; /* Space between stacked fields */
+  }
+}

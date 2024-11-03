@@ -25,7 +25,7 @@
 }
 .header-contents p {
   padding-top: 20px;
-  color: #996c0a;
+  color: #ffffff;
   font-size: 1.3vw;
 }
 .header-contents button {
@@ -45,6 +45,7 @@
 @media (max-width: 750px) {
   .header-contents {
     max-width: 65%;
+    margin-top: 0px;
   }
   .header-contents p {
     display: none;
@@ -60,6 +61,8 @@
     clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
   }
   .header h2 {
-    font-size: larger;
+    font-size: 14px;
+    margin-top: -90px;
+    padding-bottom: 50px;
   }
 }
