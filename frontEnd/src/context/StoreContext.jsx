@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState, useRef } from "react";
-import { food_list } from "../assets/assets";
+// import { food_list } from "../assets/assets";
 
 export const StoreContext = createContext(null);
 
@@ -11,20 +11,20 @@ const StoreContextProvider = (props) => {
   const [food_list, setFoofList] = useState([]);
   //   const buttonRef = useRef(null);
 
-  const addToCart = (itemId) => {
+  const addToCart = async (itemId) => {
     //async
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     }
-    // if (token) {
-    //   await axios.post(
-    //     url + "/api/cart/add",
-    //     { itemId },
-    //     { headers: { token } }
-    //   );
-    // }
+    if (token) {
+      await axios.post(
+        url + "/api/cart/add",
+        { itemId },
+        { headers: { token } }
+      );
+    }
   };
   const removeFromCart = async (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));

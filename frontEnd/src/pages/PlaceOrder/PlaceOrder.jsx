@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Ensure axios is imported
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, food_list, cartItems } = useContext(StoreContext);
+  const { getTotalCartAmount, token, food_list, cartItems, url } =
+    useContext(StoreContext);
 
   const [data, setData] = useState({
     firstName: "",
@@ -19,7 +21,7 @@ const PlaceOrder = () => {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const placeOrder = (event) => {
+  const placeOrder = async (event) => {
     event.preventDefault();
     let orderItems = [];
     food_list.forEach((item) => {
@@ -31,20 +33,42 @@ const PlaceOrder = () => {
 
     let orderData = {
       pickupLocation: "10009 N Lamar Blvd b, Austin, TX 78753",
-      userInformation: data,
+      firstName: data.firstName, // Include firstName
+      lastName: data.lastName, // Include lastName
+      phone: data.phone, // Include phone
       items: orderItems,
-      amount: getTotalCartAmount(),
+      amount: getTotalCartAmount() + 99, // Add any additional fees here
     };
 
-    console.log("Order Receipt:", orderData);
-    alert("Order placed successfully! Here is your receipt.");
+    try {
+      let response = await axios.post(url + "/api/order/place", orderData, {
+        headers: { token },
+      });
+      if (response.data.success) {
+        const { session_url } = response.data;
+        window.location.replace(session_url);
+      } else {
+        alert("Error placing order. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert(
+        "An error occurred while placing your order. Please try again later."
+      );
+    }
   };
 
   const navigate = useNavigate();
-  const { buttonRef } = useContext(StoreContext);
 
   useEffect(() => {
-    if (getTotalCartAmount() === 0) {
+    if (!token) {
+      navigate("/cart");
+      setTimeout(() => {
+        if (buttonRef.current) {
+          buttonRef.current.click();
+        }
+      }, 100);
+    } else if (getTotalCartAmount() === 0) {
       navigate("/cart");
     }
   }, [getTotalCartAmount, navigate]);
@@ -113,7 +137,8 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount()}</b>
+              <b>${getTotalCartAmount() + 99}</b>{" "}
+              {/* Ensure this is accurate */}
             </div>
           </div>
           <button type="submit">PLACE ORDER</button>

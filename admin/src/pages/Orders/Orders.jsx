@@ -54,31 +54,20 @@ const Orders = ({ url }) => {
                       })}
                     </p>
                     <p className="order-item-name">
-                      {order.address.firstName + " " + order.address.lastName}
+                      {order.firstName + " " + order.lastName}
                     </p>
-                    <div className="order-item-address">
-                      <p>{order.address.street + ","}</p>
-                      <p>
-                        {order.address.city +
-                          ", " +
-                          order.address.state +
-                          ", " +
-                          order.address.country +
-                          ", " +
-                          order.address.pincode}
-                      </p>
-                    </div>
-                    <p className="order-item-phone">{order.address.phone}</p>
+
+                    <p className="order-item-phone">{order.phone}</p>
                   </div>
                   <p>Items: {order.items.length}</p>
-                  <p>₹ {order.amount}</p>
+                  <p>$ {order.amount}</p>
                   <select
                     onChange={(event) => statusHandler(event, order._id)}
                     value={order.status}
                   >
                     <option value="Food Processing">Food Processing</option>
-                    <option value="Out for Delivery">Out for Delivery</option>
-                    <option value="Delivered">Delivered</option>
+                    <option value="Ready for pick up">Ready for pick up</option>
+                    <option value="Picked up">Picked up</option>
                   </select>
                 </div>
               </>
