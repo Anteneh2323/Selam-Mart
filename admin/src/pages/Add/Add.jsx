@@ -10,7 +10,7 @@ const Add = ({ url }) => {
     name: "",
     description: "",
     price: "",
-    category: "Salad",
+    category: "lunch",
   });
 
   const onChangeHandler = (event) => {
@@ -93,7 +93,7 @@ const Add = ({ url }) => {
                 <option value="lunch">Lunch</option>
                 <option value="dinner">Dinner</option>
                 <option value="Vegan">Vegan</option>
-                <option value="Most Ordered">Most Ordered</option>
+                <option value="Beverages">Most Ordered</option>
               </select>
             </div>
             <div className="add-price flex-col">

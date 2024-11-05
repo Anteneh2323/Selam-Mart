@@ -52,39 +52,49 @@
   top: -8px;
   right: -8px;
 }
-.navbar-profile {
-  position: relative;
-  cursor: pointer;
-}
 .nav-profile-dropdown {
   position: absolute;
-  display: none;
+  display: none; /* Initially hidden */
   right: 0;
   z-index: 1;
+  background-color: #fff2ef; /* Soft background for dropdown */
+  padding: 12px 20px; /* Slightly reduced padding for a compact look */
+  border-radius: 4px; /* Rounded corners */
+  border: 1px solid tomato; /* Maintain border color */
+  outline: 2px solid white; /* Outline for clean appearance */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for dropdown */
 }
+
 .navbar-profile:hover .nav-profile-dropdown {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: #fff2ef;
-  padding: 12px 25px;
-  border-radius: 4px;
-  border: 1px solid tomato;
-  outline: 2px solid white;
-  list-style: none;
+  display: flex; /* Show dropdown on hover */
+  flex-direction: column; /* Stack items vertically */
+  gap: 10px; /* Spacing between items */
 }
+
 .nav-profile-dropdown li {
-  display: flex;
-  gap: 10px;
-  cursor: pointer;
-  align-items: center;
+  display: flex; /* Flex layout for items */
+  gap: 10px; /* Space between icon and text */
+  cursor: pointer; /* Pointer cursor on hover */
+  align-items: center; /* Center items vertically */
+  transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
+  padding: 8px 10px; /* Padding for dropdown items */
 }
+
 .nav-profile-dropdown img {
-  width: 20px;
+  width: 20px; /* Icon size */
 }
+
+/* Change color and background on hover */
 .nav-profile-dropdown li:hover {
-  color: tomato;
+  color: tomato; /* Color change on hover */
+  background-color: rgba(255, 99, 71, 0.1); /* Light background on hover */
 }
+
+.navbar-profile {
+  position: relative; /* Position for dropdown */
+  cursor: pointer; /* Pointer cursor */
+}
+
 @media (max-width: 1050px) {
   .navbar .logo {
     width: 140px;

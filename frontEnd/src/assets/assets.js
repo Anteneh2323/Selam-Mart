@@ -67,7 +67,7 @@ export const menu_list = [
     menu_image: menu_7,
   },
   {
-    menu_name: "Most Ordered",
+    menu_name: "Beverages",
     menu_image: menu_6,
   },
 ];
