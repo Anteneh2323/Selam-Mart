@@ -1,12 +1,56 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
+import cron from "node-cron";
+import twilio from "twilio";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const twilioClient = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
+
+// Function to send an SMS notification
+const sendSMSNotification = async (order) => {
+  const message = `New Order Received:
+  Name: ${order.firstName} ${order.lastName}
+  Phone: ${order.phone}
+  Items: ${order.items
+    .map((item) => `${item.name} x${item.quantity}`)
+    .join(", ")}
+  Total Amount: $${(order.amount / 100).toFixed(2)}`;
+
+  try {
+    const response = await twilioClient.messages.create({
+      body: message,
+      from: process.env.TWILIO_PHONE_NUMBER, // Twilio number
+      to: process.env.NOTIFICATION_PHONE_NUMBER, // Number to receive notifications
+    });
+    console.log(`SMS sent successfully: ${response.sid}`);
+  } catch (error) {
+    console.error("Error sending SMS:", error);
+  }
+};
+
+// Function to clear expired orders
+export const clearExpiredOrders = async () => {
+  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000); // Current time - 24 hours
+  try {
+    const result = await orderModel.deleteMany({ date: { $lt: oneDayAgo } }); // Deletes orders older than one day
+    console.log(
+      `Expired orders cleared: ${result.deletedCount} orders deleted.`
+    );
+  } catch (error) {
+    console.log("Error clearing expired orders:", error);
+  }
+};
 
 // placing user order from frontend
 const placeOrder = async (req, res) => {
-  const frontend_url = "http://localhost:5174"; // Uncomment and define if needed
+  const frontend_url = "http://localhost:5174";
 
   try {
     const newOrder = new orderModel({
@@ -16,12 +60,13 @@ const placeOrder = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phone: req.body.phone,
-
-      // Remove address field
     });
 
     await newOrder.save();
     await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+
+    // Send SMS notification about the new order
+    await sendSMSNotification(newOrder);
 
     const line_items = req.body.items.map((item) => ({
       price_data: {

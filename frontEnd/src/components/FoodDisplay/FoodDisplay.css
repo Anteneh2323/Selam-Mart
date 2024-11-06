@@ -1,14 +1,137 @@
+/* Container for the entire FoodDisplay component */
 .food-display {
-  margin-top: 30px;
+  text-align: center;
+  padding: 20px;
 }
+
 .food-display h2 {
-  font-size: max(2vw, 24px);
-  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
+
+/* Grid layout for food items */
 .food-display-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  margin-top: 30px;
-  gap: 30px;
-  row-gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px; /* Reduced gap between columns */
+}
+
+/* Individual food item styling */
+.food-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 250px;
+  /* Remove fixed height */
+  height: auto; /* Allow items to adjust based on content */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 20px; /* Ensures space between items */
+}
+
+.food-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Image styling */
+.food-item-img-container {
+  width: 100%;
+  min-height: 180px; /* Set min-height for uniform image sizes */
+  overflow: hidden;
+  margin-bottom: 10px; /* Reduces gap between image and text */
+}
+
+.food-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the container */
+}
+
+/* Content styling */
+.food-item-info {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Food name and rating alignment */
+.food-item-name-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.food-item-name-rating p {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.food-item-name-rating img {
+  width: 60px;
+}
+
+/* Description with limited lines */
+.food-item-desc {
+  font-size: 0.9rem;
+  color: #676767;
+  line-height: 1.2;
+  height: 4.5em; /* Adjust height to prevent text cut-off */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Control number of lines */
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+}
+
+/* Price styling */
+.food-item-price {
+  color: #ff6347;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: auto; /* Pushes price to the bottom for alignment */
+}
+
+/* Media Queries for responsive design */
+@media (max-width: 768px) {
+  .food-item {
+    max-width: 100%;
+    height: auto; /* Allow height to adjust for smaller screens */
+  }
+
+  .food-item-img-container {
+    min-height: 150px; /* Smaller image height on mobile */
+  }
+
+  .food-item-desc {
+    height: 4.5em; /* Allow more space for the description */
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Adjust grid layout for larger screens */
+  .food-display-list {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(300px, 1fr)
+    ); /* Increase column size */
+  }
+
+  /* Ensure consistent item height across large screens */
+  .food-item {
+    height: auto; /* Allow height to adjust dynamically */
+  }
+
+  .food-item-img-container {
+    min-height: 200px; /* Slightly larger image container for bigger screens */
+  }
 }

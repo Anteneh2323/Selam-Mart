@@ -20,13 +20,18 @@
 }
 .header-contents h2 {
   font-weight: 700;
-  color: #000000;
+  color: #ffffff; /* Change text color to white for better contrast */
   font-size: max(4.5vw, 24px);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Add text shadow */
+  padding: 10px; /* Add padding for better appearance */
+  border-radius: 10px; /* Optional: Rounded corners */
 }
+
 .header-contents p {
   padding-top: 20px;
   color: #ffffff;
   font-size: 1.3vw;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 .header-contents button {
   border: none;

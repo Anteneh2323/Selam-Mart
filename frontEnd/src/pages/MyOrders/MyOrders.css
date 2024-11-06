@@ -14,14 +14,15 @@
   gap: 30px;
   font-size: 14px;
   padding: 10px 20px;
-  color: #454545;
-  border: 1px solid tomato;
+  color: #66440f;
+  border: 1px solid rgb(63, 50, 48);
 }
 .my-orders-order img {
   width: 50px;
 }
 .my-orders-order p span {
-  color: tomato;
+  color: rgb(208, 103, 11);
+  font-weight: bold;
 }
 .my-orders-order p b {
   font-weight: 500;
@@ -38,6 +39,12 @@
 .my-orders-order button:hover {
   background-color: #fdd1d1;
 }
+.ready-time {
+  font-weight: bold;
+  color: green; /* Or any color that fits your design */
+  margin-top: 10px;
+}
+
 @media (max-width: 900px) {
   .my-orders-order {
     grid-template-columns: 1fr 2fr 1fr;

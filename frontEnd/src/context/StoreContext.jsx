@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState, useRef } from "react";
-// import { food_list } from "../assets/assets";
+import { food_list } from "../assets/assets";
 
 export const StoreContext = createContext(null);
 
@@ -9,7 +9,7 @@ const StoreContextProvider = (props) => {
   const url = "http://localhost:4000";
   const [token, setToken] = useState("");
   const [food_list, setFoofList] = useState([]);
-  //   const buttonRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const addToCart = async (itemId) => {
     //async
@@ -83,7 +83,7 @@ const StoreContextProvider = (props) => {
     url,
     token,
     setToken,
-    // buttonRef,
+    buttonRef,
   };
   return (
     <StoreContext.Provider value={contextValue}>

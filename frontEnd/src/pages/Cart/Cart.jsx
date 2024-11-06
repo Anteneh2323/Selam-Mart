@@ -2,12 +2,31 @@ import React, { useContext } from "react";
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount, url } =
-    useContext(StoreContext);
+  const {
+    cartItems,
+    food_list,
+    removeFromCart,
+    getTotalCartAmount,
+    url,
+    token,
+  } = useContext(StoreContext);
 
   const navigate = useNavigate();
+
+  // Function to handle checkout click
+  const handleCheckout = () => {
+    if (!token) {
+      // Show a toast notification if the user is not signed in
+      toast.error("Please sign in to proceed with checkout");
+    } else if (getTotalCartAmount() > 0) {
+      // Navigate to order page if there are items in the cart
+      navigate("/order");
+    }
+  };
 
   return (
     <>
@@ -26,7 +45,7 @@ const Cart = () => {
           {food_list.map((item, index) => {
             if (cartItems[item._id] > 0) {
               return (
-                <>
+                <React.Fragment key={item._id}>
                   <div className="cart-items-title cart-items-item">
                     <img src={url + "/images/" + item.image} alt="" />
                     <p>{item.name}</p>
@@ -41,9 +60,10 @@ const Cart = () => {
                     </p>
                   </div>
                   <hr />
-                </>
+                </React.Fragment>
               );
             }
+            return null;
           })}
         </div>
         <div className="cart-bottom">
@@ -67,15 +87,13 @@ const Cart = () => {
                 </b>
               </div>
             </div>
-            <button
-              onClick={getTotalCartAmount() > 0 ? () => navigate("/order") : ""}
-            >
-              CHECKOUT
-            </button>
+            <button onClick={handleCheckout}>CHECKOUT</button>
           </div>
           <div className="cart-promocode"></div>
         </div>
       </div>
+      {/* Toast container to display toast notifications */}
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
     </>
   );
 };
