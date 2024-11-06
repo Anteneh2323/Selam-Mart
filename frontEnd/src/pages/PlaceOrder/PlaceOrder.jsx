@@ -137,8 +137,7 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount() + 99}</b>{" "}
-              {/* Ensure this is accurate */}
+              <b>${getTotalCartAmount()}</b>
             </div>
           </div>
           <button type="submit">PLACE ORDER</button>

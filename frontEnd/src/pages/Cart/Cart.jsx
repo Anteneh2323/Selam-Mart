@@ -82,9 +82,7 @@ const Cart = () => {
               <hr />
               <div className="cart-total-details">
                 <b>Total</b>
-                <b>
-                  ${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 99}
-                </b>
+                <b>${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount()}</b>
               </div>
             </div>
             <button onClick={handleCheckout}>CHECKOUT</button>
