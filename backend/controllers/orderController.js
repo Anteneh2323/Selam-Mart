@@ -50,7 +50,7 @@ export const clearExpiredOrders = async () => {
 
 // placing user order from frontend
 const placeOrder = async (req, res) => {
-  const frontend_url = "http://localhost:5174";
+  const frontend_url = "https://selam-cafe.netlify.app/";
 
   try {
     const newOrder = new orderModel({
@@ -74,18 +74,19 @@ const placeOrder = async (req, res) => {
         product_data: {
           name: item.name,
         },
-        unit_amount: item.price * 100,
+        unit_amount: Math.round(item.price * 100), // Round to the nearest integer
       },
       quantity: item.quantity,
     }));
 
+    // Add delivery charges (if any)
     line_items.push({
       price_data: {
         currency: "usd",
         product_data: {
           name: "Delivery Charges",
         },
-        unit_amount: 0 * 100,
+        unit_amount: Math.round(0 * 100), // Delivery charge is 0, so no rounding needed
       },
       quantity: 1,
     });
